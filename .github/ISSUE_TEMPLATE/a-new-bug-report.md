@@ -34,4 +34,3 @@ Steps to reproduce the behavior:
 
 > [!NOTE]
 > Useful information that the team should know, even when skimming content.
-
