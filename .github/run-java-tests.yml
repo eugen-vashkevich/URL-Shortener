@@ -1,0 +1,33 @@
+name: Run Java tests
+run-name: ${{ github.triggering_actor }} has started mandatory checks
+
+on: [pull_request]
+
+jobs:
+  java-tests:
+    name: Run Java tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install and set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '23'
+        distribution: 'corretto'
+        cache: maven
+
+    - name: Find all Maven projects
+      id: find-projects
+      run: |
+        find . -name "pom.xml" -exec dirname {} \; > projects.txt
+        echo "projects=$(cat projects.txt | tr '\n' ' ')" >> $GITHUB_ENV
+
+    - name: Run tests for each Maven project
+      run: |
+        for project in ${{ env.projects }}; do
+          echo "Running tests in $project"
+          mvn -B test --file $project/pom.xml
+        done
