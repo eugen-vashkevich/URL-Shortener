@@ -15,7 +15,7 @@ jobs:
     - name: Install and set up JDK
       uses: actions/setup-java@v4
       with:
-        java-version: '24'
+        java-version: '23'
         distribution: 'corretto'
         cache: maven
 
