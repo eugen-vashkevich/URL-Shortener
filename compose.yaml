@@ -1,0 +1,24 @@
+name: url-shortener
+
+services:
+  master-database:
+    image: postgres:17.4
+    restart: always
+    env_file:
+      - ${HOME}/.env
+    ports:
+      - "${POSTGRES_HOST_PORT}:5432"
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/master-database-password
+    volumes:
+      - master-database-data:/data/pg_data
+    secrets:
+      - master-database-password
+
+volumes:
+  master-database-data:
+
+secrets:
+  master-database-password:
+    file: ${HOME}/.secrets/url-shortener/master_database_password.txt
+
