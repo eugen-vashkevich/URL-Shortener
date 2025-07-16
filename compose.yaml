@@ -21,4 +21,3 @@ volumes:
 secrets:
   master-database-password:
     file: ${HOME}/.secrets/url-shortener/master_database_password.txt
-
