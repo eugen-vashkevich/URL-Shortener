@@ -68,3 +68,30 @@ Please follow the rules when creating a new PR:
 The code must follow the code style guides:
 - For Java, to keep the source code consistent and readable, follow the [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html).
 - Before submitting any changes, you must run the `google-java-formatter` to automatically format your code. You can run the `google-java-formatter` via CLT or via the IDEA. [Find out](https://github.com/google/google-java-format) how to set up `google-java-formatter` for your IDE or CLT.
+
+## How to run project locally
+
+1. Ensure you have a `~/.env` file with the following environment variables. Adjust their values to suit your local development configuration:
+
+   ```
+   POSTGRES_USER=<test> # Change <test> to the name of the DB's user
+   POSTGRES_DB=<master_db> # Change <master_db> to the name of the master DB
+   POSTGRES_HOST_PORT=5432 # It's ok to leave the default port
+   POSTGRES_HOST=<host> # Replace <host> with your host to connect to the PostgreSQL database
+   ```
+
+1. Ensure you have a `master_database_password.txt` file at `~/.secrets/url-shortener/` path.
+	- It should contain only one string with an authentication password for the PostgreSQL database.
+	- Make sure you have chosen unique and strong password.
+	- You can use commands below to create such file.
+	  **DO NOT** run the following command as is without changing the echo-ed string:
+
+   ```sh
+   mkdir -p ~/.secrets/url-shortener/
+   echo "<PASSWORD>" > ~/.secrets/url-shortener/master_database_password.txt # Replace <PASSWORD> string with a unique and strong password
+   ```
+
+1. Run [docker compose](https://docs.docker.com/reference/cli/docker/compose/) as:
+   ```sh
+   docker compose --env-file ~/.env up --build
+   ```
