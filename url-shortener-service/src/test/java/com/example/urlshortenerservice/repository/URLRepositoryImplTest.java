@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.time.OffsetDateTime;
@@ -81,5 +82,61 @@ class URLRepositoryImplTest {
 
     // Then
     Assertions.assertThrows(DuplicateKeyException.class, () -> urlRepository.save(secondURLToSave));
+  }
+
+  @Test
+  void updateShortUrlCode_WhenIdExists_ThenShortUrlCodeIsUpdated() {
+    // Given
+    final var initialUrl = new URL();
+    initialUrl.setOriginalUrl("https://update.me");
+    initialUrl.setCreatedAt(OffsetDateTime.now());
+    initialUrl.setExpiresAt(OffsetDateTime.now().plusDays(1));
+    initialUrl.setShortUrlCode(null);
+
+    final var savedUrl = urlRepository.save(initialUrl).get();
+    final var newShortCode = "updated789";
+
+    // When
+    final var updatedUrlOptional = urlRepository.updateShortUrlCode(savedUrl.getId(), newShortCode);
+
+    // Then
+    Assertions.assertTrue(updatedUrlOptional.isPresent());
+    final var updatedUrl = updatedUrlOptional.get();
+    Assertions.assertEquals(savedUrl.getId(), updatedUrl.getId());
+    Assertions.assertEquals(newShortCode, updatedUrl.getShortUrlCode());
+  }
+
+  @Test
+  void updateShortUrlCode_WhenIdDoesNotExist_ThenThrowDataRetrievalFailureException() {
+    // Given
+    final long nonExistentId = 999L;
+    final var shortCode = "nonexistent";
+
+    // When and Then
+    Assertions.assertThrows(
+        DataRetrievalFailureException.class,
+        () -> urlRepository.updateShortUrlCode(nonExistentId, shortCode),
+        "Updating a non-existent ID should throw DataRetrievalFailureException");
+  }
+
+  @Test
+  void findById_WhenURLFound_ThenReturnOptionalOfURL() {
+    // Given
+    final var urlToSave = new URL();
+    urlToSave.setOriginalUrl("https://find.me/by/id");
+    urlToSave.setShortUrlCode("findbyid");
+    urlToSave.setCreatedAt(OffsetDateTime.now());
+    urlToSave.setExpiresAt(OffsetDateTime.now().plusDays(1));
+    final var savedUrl = urlRepository.save(urlToSave).get();
+
+    // When
+    final var foundUrlOptional = urlRepository.findById(savedUrl.getId());
+
+    // Then
+    Assertions.assertTrue(foundUrlOptional.isPresent(), "URL should be found by ID");
+    final var foundUrl = foundUrlOptional.get();
+    Assertions.assertEquals(savedUrl.getId(), foundUrl.getId());
+    Assertions.assertEquals(savedUrl.getOriginalUrl(), foundUrl.getOriginalUrl());
+    Assertions.assertEquals(savedUrl.getShortUrlCode(), foundUrl.getShortUrlCode());
   }
 }
