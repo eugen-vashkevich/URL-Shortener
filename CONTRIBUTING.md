@@ -85,3 +85,4 @@ The code must follow the code style guides:
    ```sh
    docker compose --env-file ~/.env up --build
    ```
+1. Connect to your database and run the script `database/initialize_db_tables.sql` to create the table.
