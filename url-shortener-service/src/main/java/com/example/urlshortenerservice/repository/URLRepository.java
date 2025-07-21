@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface URLRepository {
     Optional<URL> save(URL url);
+    Optional<URL> updateShortUrlCode(long id, String shortUrlCode);
+    Optional<URL> findById(long id);
 }

@@ -78,17 +78,7 @@ The code must follow the code style guides:
    POSTGRES_DB=<master_db> # Change <master_db> to the name of the master DB
    POSTGRES_HOST_PORT=5432 # It's ok to leave the default port
    POSTGRES_HOST=<host> # Replace <host> with your host to connect to the PostgreSQL database
-   ```
-
-1. Ensure you have a `master_database_password.txt` file at `~/.secrets/url-shortener/` path.
-	- It should contain only one string with an authentication password for the PostgreSQL database.
-	- Make sure you have chosen unique and strong password.
-	- You can use commands below to create such file.
-	  **DO NOT** run the following command as is without changing the echo-ed string:
-
-   ```sh
-   mkdir -p ~/.secrets/url-shortener/
-   echo "<PASSWORD>" > ~/.secrets/url-shortener/master_database_password.txt # Replace <PASSWORD> string with a unique and strong password
+   DB_PASSWORD=<password> # Replace <password> with your password to connect to the PostgreSQL database
    ```
 
 1. Run [docker compose](https://docs.docker.com/reference/cli/docker/compose/) as:
