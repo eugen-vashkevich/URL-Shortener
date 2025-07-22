@@ -118,6 +118,12 @@ public class URLRepositoryImpl implements URLRepository {
     }
   }
 
+  @Override
+  public int deleteExpiresUrl(OffsetDateTime currentTime) {
+    final var sql = "DELETE FROM urls WHERE expires_at < ?";
+    return jdbcTemplate.update(sql, currentTime);
+  }
+
   private final RowMapper<URL> rowMapper =
       new RowMapper<URL>() {
         @Override
