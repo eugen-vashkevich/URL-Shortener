@@ -9,15 +9,25 @@ services:
     ports:
       - "${POSTGRES_HOST_PORT}:5432"
     environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/master-database-password
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - master-database-data:/data/pg_data
-    secrets:
-      - master-database-password
+
+  url-shortener-write-service:
+    build:
+      context: url-shortener-service
+      dockerfile: Dockerfile
+    container_name: url-shortener-write-service
+    restart: always
+    depends_on:
+      - master-database
+    env_file:
+      - ${HOME}/.env
+    ports:
+      - "${DOCKER_URL_SHORTENER_WRITE_SERVICE_LISTEN_HOST_PORT}:8080"
+    volumes:
+      - ${HOME}/app/logs/:/app/logs
+      - ${HOME}/.env:/root/.env:ro
 
 volumes:
   master-database-data:
-
-secrets:
-  master-database-password:
-    file: ${HOME}/.secrets/url-shortener/master_database_password.txt
