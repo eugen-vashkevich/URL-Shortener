@@ -68,4 +68,15 @@ public class URLService {
 
     return urlRepository.updateShortUrlCode(url.getId(), shortCode);
   }
+
+  /**
+   * Deletes URLs that have expired before the given current time.
+   *
+   * @param currentTime The current time to compare against the expiration date.
+   * @return The number of URLs deleted.
+   */
+  @Transactional
+  public int deleteExpiredUrls(OffsetDateTime currentTime) {
+    return urlRepository.deleteExpiresUrl(currentTime);
+  }
 }
