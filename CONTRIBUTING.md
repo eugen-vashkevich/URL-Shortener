@@ -79,6 +79,9 @@ The code must follow the code style guides:
    POSTGRES_HOST_PORT=5432 # It's ok to leave the default port
    POSTGRES_HOST=<host> # Replace <host> with your host to connect to the PostgreSQL database
    DB_PASSWORD=<password> # Replace <password> with your password to connect to the PostgreSQL database
+   DOCKER_URL_SHORTENER_WRITE_SERVICE_LISTEN_HOST_PORT=8080 # It's ok to leave the default port 
+   DOCKER_URL_SHORTENER_READ_SERVICE_LISTEN_HOST_PORT=8081 # It's ok to leave the default port
+
    ```
 
 1. Run [docker compose](https://docs.docker.com/reference/cli/docker/compose/) as:

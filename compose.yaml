@@ -28,6 +28,22 @@ services:
     volumes:
       - ${HOME}/app/logs/:/app/logs
       - ${HOME}/.env:/root/.env:ro
+    
+  url-shortener-read-service:
+    build:
+      context: url-shortener-read-service
+      dockerfile: Dockerfile
+    container_name: url-shortener-read-service
+    restart: always
+    depends_on:
+      - master-database
+    env_file:
+      - ${HOME}/.env
+    ports:
+      - "${DOCKER_URL_SHORTENER_READ_SERVICE_LISTEN_HOST_PORT}:8080"
+    volumes:
+      - ${HOME}/app/logs/:/app/logs
+      - ${HOME}/.env:/root/.env:ro
 
 volumes:
   master-database-data:
