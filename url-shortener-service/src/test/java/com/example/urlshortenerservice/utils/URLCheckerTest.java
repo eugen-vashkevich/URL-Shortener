@@ -41,7 +41,7 @@ class URLCheckerTest {
   }
 
   @Test
-  void URLWithoutScheme_WhenCheckingCorrectURL_ThenReturnTrue() {
+  void URLWithoutScheme_WhenCheckingNotCorrectURL_ThenReturnFalse() {
     // Given
     final var urlToCheck = "google.com";
 
@@ -49,7 +49,7 @@ class URLCheckerTest {
     final var resultOfChecking = URLChecker.isValidURL(urlToCheck);
 
     // Then
-    Assertions.assertTrue(resultOfChecking);
+    Assertions.assertFalse(resultOfChecking);
   }
 
   @Test
