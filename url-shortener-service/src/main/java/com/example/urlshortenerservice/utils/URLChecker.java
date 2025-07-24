@@ -28,25 +28,7 @@ public class URLChecker {
       final var uri = new URI(urlString);
 
       if (!uri.isAbsolute()) {
-        try {
-          url = new URI("https://" + urlString).toURL();
-          int responseCode = getResponseCode(url);
-          if (responseCode >= 200 && responseCode < 400) {
-            return true;
-          }
-        } catch (URISyntaxException | MalformedURLException e) {
-          return false;
-        }
-
-        try {
-          url = new URI("http://" + urlString).toURL();
-          int responseCode = getResponseCode(url);
-          return responseCode >= 200 && responseCode < 400;
-        } catch (URISyntaxException | MalformedURLException e) {
-
-          return false;
-        }
-
+        return false;
       } else {
         url = uri.toURL();
       }
