@@ -10,6 +10,7 @@ services:
       - "${POSTGRES_HOST_PORT}:5432"
     environment:
       POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
     volumes:
       - master-database-data:/data/pg_data
 
