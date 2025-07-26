@@ -13,6 +13,8 @@ services:
       POSTGRES_HOST_AUTH_METHOD: scram-sha-256
     volumes:
       - master-database-data:/data/pg_data
+      - ./database/initialize_db_tables.sql:/docker-entrypoint-initdb.d/initialize_db_tables.sql
+
 
   url-shortener-write-service:
     build:
