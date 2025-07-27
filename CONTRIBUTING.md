@@ -31,11 +31,11 @@ where:
 - `<#issue>` - is the number of the corresponding issue that the PR addresses.
 - `<short-description>` - is a short description of the issue or bug you're addressing. It could be a copy of the issue title sometimes.
 
-	Example:
+  Example:
 
-	```
-	2-create-contributing-guidelines
-	```
+  ```
+  2-create-contributing-guidelines
+  ```
 
 ### Commit Message Guidelines
 
@@ -45,12 +45,12 @@ Please follow the guidelines regarding commit messages:
 - Every commit should be compilable if it makes sense;
 - Every commit should contain a small bunch of logically-related changes, that allows easy cherry-picking.
 
-	Examples:
+  Examples:
 
-	```
-	Adds an info about a user.
-	Updates API documentation: remove useless section.
-	```
+  ```
+  Adds an info about a user.
+  Updates API documentation: remove useless section.
+  ```
 
 ### Submitting a Pull Request
 
@@ -71,21 +71,36 @@ The code must follow the code style guides:
 
 ## How to run project locally
 
-1. Ensure you have a `~/.env` file with the following environment variables. Adjust their values to suit your local development configuration:
+1. Ensure you have a `~/.env` file with the following environment variables. Adjust their values to suit your local
+   development configuration:
 
    ```
-   POSTGRES_USER=<test> # Change <test> to the name of the DB's user
-   POSTGRES_DB=<master_db> # Change <master_db> to the name of the master DB
+   POSTGRES_USER=test # Change <test> to the name of the DB's user
+   POSTGRES_DB=master_db # Change <master_db> to the name of the master DB
    POSTGRES_HOST_PORT=5432 # It's ok to leave the default port
-   POSTGRES_HOST=<host> # Replace <host> with your host to connect to the PostgreSQL database
-   DB_PASSWORD=<password> # Replace <password> with your password to connect to the PostgreSQL database
+   POSTGRES_HOST=master-database # Replace <master-database> with your host to connect to the PostgreSQL database
+   DB_PASSWORD=password # Replace <password> with your password to connect to the PostgreSQL database
    DOCKER_URL_SHORTENER_WRITE_SERVICE_LISTEN_HOST_PORT=8080 # It's ok to leave the default port 
    DOCKER_URL_SHORTENER_READ_SERVICE_LISTEN_HOST_PORT=8081 # It's ok to leave the default port
-
+   POSTGRES_HOST_PORT_REPLICA=5433 # It's ok to leave this port
+   POSTGRES_REPLICATION_USER=repl_user # It's ok to leave this name
+   POSTGRES_REPLICATION_PASSWORD=password # Replace <password> with your password to connect to the PostgreSQL database
+   POSTGRES_HOST_REPLICA=replica-database # Replace <master-database> with your host to connect to the PostgreSQL database
+   
    ```
 
 1. Run [docker compose](https://docs.docker.com/reference/cli/docker/compose/) as:
    ```sh
    docker compose --env-file ~/.env up --build
    ```
-1. Connect to your database and run the script `database/initialize_db_tables.sql` to create the table.
+
+#### Important notes on variables:
+
+1. `POSTGRES_HOST` and `POSTGRES_HOST_REPLICA`: These are the names of the Docker Compose services. They are used for
+   internal communication between containers. Do not change them to IP addresses or other names unless you change the
+   corresponding service names in `compose.yml`.
+1. Passwords: Always use strong passwords and make sure they match the ones you configured in the PostgreSQL
+   initialization scripts (if you changed them).
+1. This is an example `.env` file content to help you quickly test and launch services. Be very careful when changing
+   their values, as they dictate the interaction between all your services.
+
