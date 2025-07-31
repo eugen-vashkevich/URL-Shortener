@@ -1,6 +1,6 @@
 package com.example.urlshortenerreadservice.service;
 
-import com.example.urlshortenerreadservice.exceprions.UrlNotFoundException;
+import com.example.urlshortenerreadservice.exceptions.UrlNotFoundException;
 import com.example.urlshortenerreadservice.models.URL;
 import com.example.urlshortenerreadservice.repository.URLRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;

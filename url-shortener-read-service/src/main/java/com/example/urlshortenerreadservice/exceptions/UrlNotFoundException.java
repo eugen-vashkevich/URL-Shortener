@@ -1,4 +1,4 @@
-package com.example.urlshortenerreadservice.exceprions;
+package com.example.urlshortenerreadservice.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

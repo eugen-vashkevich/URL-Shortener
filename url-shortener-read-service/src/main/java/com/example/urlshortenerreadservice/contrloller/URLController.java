@@ -1,6 +1,6 @@
 package com.example.urlshortenerreadservice.contrloller;
 
-import com.example.urlshortenerreadservice.exceprions.UrlNotFoundException;
+import com.example.urlshortenerreadservice.exceptions.UrlNotFoundException;
 import com.example.urlshortenerreadservice.service.URLService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
