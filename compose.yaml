@@ -41,6 +41,18 @@ services:
     networks:
       - url-shortener
 
+
+  redis:
+    image: redis:8.0.2-alpine
+    restart: always
+    env_file:
+      - ${HOME}/.env
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis-data:/data
+    networks:
+      - url-shortener
+
   url-shortener-write-service:
     build:
       context: url-shortener-service
@@ -82,6 +94,7 @@ services:
 volumes:
   master-database-data:
   replica-database-data:
+  redis-data:
 
 networks:
   url-shortener:
