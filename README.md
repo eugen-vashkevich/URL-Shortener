@@ -22,7 +22,6 @@ The system is designed to be highly scalable and resilient by separating the wri
 
 <img width="1112" height="552" alt="image" src="https://github.com/user-attachments/assets/1d276822-74b7-4baf-b622-3436febc8b4e" />
 
-
 1. **Write Operations**: When a user wants to shorten a URL, the request is sent to the write-service. This service
    generates a unique short code, saves the mapping to the master database, and returns the shortened URL to the user.
 1. **Read Operations**: When a user accesses a shortened URL, the request hits the read-service.
