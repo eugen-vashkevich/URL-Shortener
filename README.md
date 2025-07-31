@@ -77,4 +77,5 @@ Redirects the user to the corresponding long URL.
 
 ## License 📄
 
-This project is licensed under the MIT License. See the [LICENSE](.LICENSE) file for details.
+This project is licensed under the MIT License. See
+the [LICENSE](https://github.com/eugen-vashkevich/URL-Shortener/blob/30-add-readme-file/LICENSE) file for details.
