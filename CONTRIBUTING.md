@@ -86,7 +86,10 @@ The code must follow the code style guides:
    POSTGRES_REPLICATION_USER=repl_user # It's ok to leave this name
    POSTGRES_REPLICATION_PASSWORD=password # Replace <password> with your password to connect to the PostgreSQL database
    POSTGRES_HOST_REPLICA=replica-database # Replace <master-database> with your host to connect to the PostgreSQL database
-   
+   REDIS_HOST=redis # Replace <redis> with your host to connect to the Redis
+   REDIS_HOST_PORT=6379  # It's ok to leave this port
+   REDIS_PASSWORD=password  # Replace <password> with your password to connect to the Redis
+
    ```
 
 1. Run [docker compose](https://docs.docker.com/reference/cli/docker/compose/) as:
@@ -96,7 +99,7 @@ The code must follow the code style guides:
 
 #### Important notes on variables:
 
-1. `POSTGRES_HOST` and `POSTGRES_HOST_REPLICA`: These are the names of the Docker Compose services. They are used for
+1. `REDIS_HOST`, `POSTGRES_HOST` and `POSTGRES_HOST_REPLICA`: These are the names of the Docker Compose services. They are used for
    internal communication between containers. Do not change them to IP addresses or other names unless you change the
    corresponding service names in `compose.yml`.
 1. Passwords: Always use strong passwords and make sure they match the ones you configured in the PostgreSQL
