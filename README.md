@@ -20,7 +20,7 @@ reliability, and Redis for caching frequently accessed URLs.
 
 The system is designed to be highly scalable and resilient by separating the write and read concerns.
 
-<img width="1112" height="552" alt="image" src="https://github.com/user-attachments/assets/1d276822-74b7-4baf-b622-3436febc8b4e" />
+<img width="855" height="544" alt="image" src="https://github.com/user-attachments/assets/4150b25c-7ed8-40ba-907b-e2ff1df11fc2" />
 
 1. **Write Operations**: When a user wants to shorten a URL, the request is sent to the write-service. This service
    generates a unique short code, saves the mapping to the master database, and returns the shortened URL to the user.
@@ -34,46 +34,6 @@ The system is designed to be highly scalable and resilient by separating the wri
 You can read the
 instructions [here](https://github.com/eugen-vashkevich/URL-Shortener/blob/main/CONTRIBUTING.md#how-to-run-project-locally)
 how to start the project.
-
-## API Endpoints 📖
-
-### Write Service
-
-#### Shorten a URL
-
-**Endpoint**: POST /api/v1/shorten
-
-Request Body:
-
-```json
-{
-  "longUrl": "https://your-very-long-url.com/with/a/lot/of/path/segments"
-}
-```
-
-Success Response (201 Created):
-
-```json
-{
-  "id": 1,
-  "originalUrl": "https://your-very-long-url.com/with/a/lot/of/path/segments",
-  "shortUrlCode": "1",
-  "createdAt": "2025-07-31T12:59:46.941683Z",
-  "expiresAt": "2025-08-07T12:59:46.941683Z"
-}
-```
-
-### Read Service
-
-#### Redirect to Original URL
-
-**Endpoint**: GET /{shortCode}
-
-**Example**: GET /aBcDeF1
-
-Success Response (302 Found):
-
-Redirects the user to the corresponding long URL.
 
 ## License 📄
 
