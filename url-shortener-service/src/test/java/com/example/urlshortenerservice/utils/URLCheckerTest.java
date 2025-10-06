@@ -19,7 +19,7 @@ class URLCheckerTest {
   @Test
   void URLIsValid_WhenCheckingAccessibleURLWithPath_ThenReturnTrue() {
     // Given
-    final var urlToCheck = "https://www.wikipedia.org/wiki/Main_Page";
+    final var urlToCheck = "https://developer.mozilla.org/en-US/docs/Web/HTTP";
 
     // When
     final var resultOfChecking = URLChecker.isValidURL(urlToCheck);
