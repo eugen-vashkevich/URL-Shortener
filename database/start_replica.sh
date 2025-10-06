@@ -17,7 +17,7 @@ fi
   chmod 0700 "$PGDATA"
 
   export PGPASSWORD="${REPL_PASSWORD}"
-  pg_basebackup --pgdata="$PGDATA" -R --slot=replication_slot --host="${MASTER_HOST}" --port="${MASTER_HOST_PORT}" -U "${REPL_USER}" -w
+  pg_basebackup --pgdata="$PGDATA" -R --slot=replication_slot --host="${MASTER_HOST}" --port=5432 -U "${REPL_USER}" -w
   unset PGPASSWORD
 
 exec postgres \
