@@ -78,11 +78,13 @@ The code must follow the code style guides:
    POSTGRES_USER=test # Change <test> to the name of the DB's user
    POSTGRES_DB=master_db # Change <master_db> to the name of the master DB
    POSTGRES_HOST_PORT=5432 # It's ok to leave the default port
+   POSTGRES_INTERNAL_PORT = 5432 # The port on which the database runs inside the container
    POSTGRES_HOST=master-database # Replace <master-database> with your host to connect to the PostgreSQL database
    DB_PASSWORD=password # Replace <password> with your password to connect to the PostgreSQL database
    DOCKER_URL_SHORTENER_WRITE_SERVICE_LISTEN_HOST_PORT=8080 # It's ok to leave the default port 
    DOCKER_URL_SHORTENER_READ_SERVICE_LISTEN_HOST_PORT=8081 # It's ok to leave the default port
    POSTGRES_HOST_PORT_REPLICA=5433 # It's ok to leave this port
+   POSTGRES_REPLICA_INTERNAL_PORT = 5432 # The port on which the database runs inside the container
    POSTGRES_REPLICATION_USER=repl_user # It's ok to leave this name
    POSTGRES_REPLICATION_PASSWORD=password # Replace <password> with your password to connect to the PostgreSQL database
    POSTGRES_HOST_REPLICA=replica-database # Replace <master-database> with your host to connect to the PostgreSQL database
